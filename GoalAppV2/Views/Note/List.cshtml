@@ -1,0 +1,7 @@
+﻿@model NotesListViewModel
+
+@foreach (var note in Model.Notes)
+{
+    <h2>@note.Title</h2>
+    <p>@note.Description</p>
+}

@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace GoalAppV2.Models
 {
-    public class MockNoteRepository : INoteRepository
+    //Not in use
+    public class MockNoteRepository
     {
         public IEnumerable<Note> AllNotes()
         {
@@ -31,6 +32,5 @@ namespace GoalAppV2.Models
         {
             return AllNotes().FirstOrDefault(n => n.Id == noteId);
         }
-
     }
 }

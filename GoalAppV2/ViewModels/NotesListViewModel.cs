@@ -9,5 +9,6 @@ namespace GoalAppV2.ViewModels
     public class NotesListViewModel
     {
         public IEnumerable<Note> Notes { get; set; }
+        public Note Note { get; set; }
     }
 }

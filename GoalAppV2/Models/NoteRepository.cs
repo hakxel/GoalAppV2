@@ -26,5 +26,23 @@ namespace GoalAppV2.Models
         {
             return _appDbContext.Notes.FirstOrDefault(n => n.Id == noteId);
         }
+
+        public void CreateNote(Note note)
+        {
+            _appDbContext.Notes.Add(note);
+            _appDbContext.SaveChanges();
+        }
+
+        public void UpdateNote(Note note)
+        {
+            _appDbContext.Notes.Update(note);
+            _appDbContext.SaveChanges();
+        }
+
+        public void Delete(Note note)
+        {
+            _appDbContext.Notes.Remove(note);
+            _appDbContext.SaveChanges();
+        }
     }
 }

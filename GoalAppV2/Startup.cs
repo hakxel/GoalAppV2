@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoalAppV2.Areas.Identity;
 using GoalAppV2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +31,12 @@ namespace GoalAppV2
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();

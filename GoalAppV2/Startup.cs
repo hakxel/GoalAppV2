@@ -30,7 +30,7 @@ namespace GoalAppV2
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();

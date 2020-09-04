@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoalAppV2.Controllers
 {
-    [Authorize(Roles = "Manager")]
+    [Authorize]
     public class AdminController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -94,7 +94,6 @@ namespace GoalAppV2.Controllers
         public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel)
         {
             var user = await _userManager.FindByIdAsync(editUserViewModel.Id);
-
             if (user != null)
             {
                 user.Email = editUserViewModel.Email;
@@ -113,6 +112,7 @@ namespace GoalAppV2.Controllers
             return RedirectToAction("UserManagement", _userManager.Users);
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string userId)
         {

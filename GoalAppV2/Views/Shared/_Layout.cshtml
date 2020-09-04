@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity@inject SignInManager<ApplicationUser> SignInManager
+﻿@using Microsoft.AspNetCore.Identity
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,12 +26,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Note" asp-action="List">Notes</a>
                         </li>
-                        @if(SignInManager.IsSignedIn(User) && User.IsInRole("Manager"))
-                        {
+                       
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
                             </li>
-                        }
+                        
                         <partial name="_LoginPartial" />
                     </ul>
                 </div>

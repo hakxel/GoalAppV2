@@ -1,4 +1,13 @@
-﻿<h2>User Claims</h2>
+﻿@model UserDetailsViewModel
+
+<h3>Current User Details</h3>
+<br />
+<partial name="_UserDetailsPartial" model="@Model"/>
+
+<br />
+<br />
+
+<h3>User Claims</h3>
 <br />
 
 @if (User.Identity.IsAuthenticated)
@@ -24,6 +33,6 @@
     </table>
 
 
-    <a asp-area="" asp-controller="Admin" asp-action="UserManagement">Manage Users</a>
+    <a asp-area="" asp-controller="Admin" asp-action="UserManagement" class="btn btn-info">Manage Users</a>
 
 }

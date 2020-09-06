@@ -22,15 +22,32 @@ namespace GoalAppV2.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var users = _userManager.Users;
-            return View(users);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return RedirectToAction("UserManagement", _userManager.Users);
+            }
+
+            var currUser = new UserDetailsViewModel()
+            {
+                Id = User.Claims.First(c => c.Type == "UserId").Value,
+                FullName = User.Claims.First(c => c.Type == "FullName").Value,
+                Email = user.Email,
+                UserName = user.UserName
+            };
+
+            return View(currUser);
         }
 
-        public IActionResult UserManagement()
+        public async Task<IActionResult> UserManagement()
         {
+            var user = await _userManager.GetUserAsync(User);
+            var userId = await _userManager.GetUserIdAsync(user);
             var users = _userManager.Users;
+            ViewBag.loggedUserId = userId;
 
             return View(users);
         }
@@ -69,6 +86,27 @@ namespace GoalAppV2.Controllers
             return View(addUserViewModel);
         }
 
+        public async Task<IActionResult> ViewUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return RedirectToAction("UserManagement", _userManager.Users);
+            }
+
+            
+            var viewModel = new UserDetailsViewModel()
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                Email = user.Email,
+                UserName = user.UserName,
+            };
+
+            return View(viewModel);
+        }
+
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -84,7 +122,6 @@ namespace GoalAppV2.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
-                UserClaims = claims.Select(c => c.Value).ToList()
             };
 
             return View(viewModel);

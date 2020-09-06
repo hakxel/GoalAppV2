@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace GoalAppV2.ViewModels
 {
-    public class EditUserViewModel
+    public class UserDetailsViewModel
     {
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter the user name")]
-        [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Please enter the user email")]
         public string Email { get; set; }
+
+        public string FullName { get; set; }
     }
 }

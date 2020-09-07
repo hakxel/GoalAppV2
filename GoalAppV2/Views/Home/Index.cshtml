@@ -2,7 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+<br />
+<br />
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  <div class="jumbotron">
+      <h1 class="display-4">Welcome to the Goal App</h1>
+      <p class="lead">This is a showcase shared notes app for the commons team</p>
+      <hr class="my-4">
+      <p>Create notes with important messages or information you want other team members to see</p>
+      <p class="lead">
+        <a asp-controller="Note" asp-action="Create" asp-area="" class="btn btn-primary" role="button">Add Note Now</a>
+      </p>
+  </div>
 </div>

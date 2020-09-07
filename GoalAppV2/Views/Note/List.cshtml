@@ -1,14 +1,22 @@
 ﻿
 @model NotesListViewModel
 
-@foreach (var note in Model.Notes)
-{
-    <h2>@note.Title</h2>
-    <p>@note.Description</p>
-    <a asp-controller="Note" asp-area="" asp-action="Edit" asp-route-id="@note.Id">Edit</a>
-    <a asp-controller="Note" asp-area="" asp-action="Delete" asp-route-id="@note.Id">Delete</a>
-}
+<h3>Notes Board</h3>
 
 <br />
+<div class="row">
+   @foreach (var note in Model.Notes)
+    {
+         <div class="col-sm-6 col-md-6 col-lg-4">
+            <partial name="_NoteCardPartial" model="@note"/>
+            <br />
+         </div>
+
+    }
+</div>
+
 <br />
-<a asp-controller="Note" asp-action="Create" asp-area="">Add new</a>
+<a asp-controller="Note" asp-action="Create" asp-area="" class="btn btn-info">Add new</a>
+
+
+

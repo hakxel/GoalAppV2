@@ -1,0 +1,11 @@
+﻿@model Note
+
+<div class="card">
+  <h5 class="card-header">@Model.Title</h5>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Owner: @Model.CreatedBy</h6>
+    <p class="card-text">@Model.Description</p>
+    <a asp-controller="Note" asp-area="" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-controller="Note" asp-area="" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Delete</a>
+  </div>
+</div>

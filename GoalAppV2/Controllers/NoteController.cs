@@ -39,7 +39,7 @@ namespace GoalAppV2.Controllers
         public IActionResult Create(Note note)
         {
             Note newNote = new Note();
-            var userName = User.Identity.Name;
+            var userName = User.Claims.First(c => c.Type == "FullName").Value;
 
             newNote.Title = note.Title;
             newNote.Description = note.Description;

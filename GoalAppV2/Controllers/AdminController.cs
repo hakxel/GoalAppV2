@@ -107,6 +107,7 @@ namespace GoalAppV2.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Policy = "IsLoggedUser")]
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -116,7 +117,7 @@ namespace GoalAppV2.Controllers
                 return RedirectToAction("UserManagement", _userManager.Users);
             }
 
-            var claims = await _userManager.GetClaimsAsync(user);
+
             var viewModel = new EditUserViewModel()
             {
                 Id = user.Id,

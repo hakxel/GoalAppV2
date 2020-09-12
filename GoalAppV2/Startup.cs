@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoalAppV2.Areas.Identity;
 using GoalAppV2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +26,7 @@ namespace GoalAppV2
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
@@ -41,6 +43,13 @@ namespace GoalAppV2
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("IsLoggedUser",
+                    policy => policy.Requirements.Add(new IsLoggedUserRequirement()));
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAuthorizationHandler, IsLoggedUserHandler>();
             services.AddScoped<INoteRepository, NoteRepository>();
         }
 
